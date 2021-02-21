@@ -1,0 +1,11 @@
+# main
+/node_modules
+yarn.lock
+yarn-error.log
+
+# configurations
+.editorconfig
+.eslintignore
+.eslintrc
+.gitignore
+tsconfig.json
