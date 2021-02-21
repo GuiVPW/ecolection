@@ -4,9 +4,7 @@
   "main": "src/app/main/index.ts",
   "license": "MIT",
 	"scripts": {
-		"migrate": "migrate:save && migrate:up",
-    "migrate:up": "prisma migrate up --experimental",
-    "migrate:save": "prisma migrate save --experimental",
+    "migrate:generate": "prisma migrate dev --preview-feature --name",
     "studio": "prisma studio"
 	},
   "dependencies": {

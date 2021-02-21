@@ -6,3 +6,15 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model Points {
+  id        String  @id @default(uuid())
+  image     String
+  name      String
+  email     String
+  whatsapp  String
+  latitude  Decimal
+  longitude Decimal
+  city      String
+  uf        String  @db.VarChar(2)
+}
