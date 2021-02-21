@@ -18,3 +18,9 @@ model Points {
   city      String
   uf        String  @db.VarChar(2)
 }
+
+model Items {
+  id    String @id @default(uuid())
+  image String
+  title String
+}
