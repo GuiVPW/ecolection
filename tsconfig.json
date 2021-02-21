@@ -16,7 +16,9 @@
 		"experimentalDecorators": true,
 		"rootDir": ".",
 		"baseUrl": "./src/app",
-		"paths": {},
+		"paths": {
+      "@main/*": ["main/*"]
+    },
 		"declaration": true
 	},
 	"exclude": [
