@@ -8,19 +8,31 @@ generator client {
 }
 
 model Points {
-  id        String  @id @default(uuid())
-  image     String
-  name      String
-  email     String
-  whatsapp  String
-  latitude  Decimal
-  longitude Decimal
-  city      String
-  uf        String  @db.VarChar(2)
+  id         String       @id @default(uuid())
+  image      String
+  name       String
+  email      String
+  whatsapp   String
+  latitude   Decimal
+  longitude  Decimal
+  city       String
+  uf         String       @db.VarChar(2)
+  PointItems PointItems[]
 }
 
 model Items {
-  id    String @id @default(uuid())
-  image String
-  title String
+  id         String       @id @default(uuid())
+  image      String
+  title      String
+  PointItems PointItems[]
+}
+
+model PointItems {
+  id       String @id @default(uuid())
+  point    Points @relation(fields: [pointsId], references: [id])
+  items    Items  @relation(fields: [itemsId], references: [id])
+  pointsId String @map("point_id")
+  itemsId  String @map("item_id")
+
+  @@map("point_items")
 }
