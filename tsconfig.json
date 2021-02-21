@@ -17,7 +17,11 @@
 		"rootDir": ".",
 		"baseUrl": "./src/app",
 		"paths": {
-      "@main/*": ["main/*"]
+      "@main/*": ["main/*"],
+      "@presentations/*": ["presentations/*"],
+      "@domain/*": ["domain/*"],
+      "@infra/*": ["infra/*"],
+      "@data/*": ["data/*"],
     },
 		"declaration": true
 	},
