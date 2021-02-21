@@ -5,6 +5,8 @@
   "license": "MIT",
 	"scripts": {
     "migrate:generate": "prisma migrate dev --preview-feature --name",
+    "migrate:reset": "prisma migrate reset --preview-feature",
+    "run:seeds": "prisma db seed --preview-feature",
     "studio": "prisma studio"
 	},
   "dependencies": {
