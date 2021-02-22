@@ -1,8 +1,9 @@
 import { PointRepository } from '@data/protocols/pointRepository'
+import { ItemModel } from '@domain/models/item'
 import { PointModel } from '@domain/models/point'
+import { PointItemsModel } from '@domain/models/pointItems'
 import { UnableError } from '@presentations/errors'
-import { badRequest } from '@presentations/helpers/http-helper'
-import { PointItems, Prisma } from '@prisma/client'
+import { badRequest, notFoundError } from '@presentations/helpers/http-helper'
 import { PrismaHelper } from '../helpers/prismaHelper'
 
 export class PointPrismaRepository implements PointRepository {
@@ -27,7 +28,7 @@ export class PointPrismaRepository implements PointRepository {
 
 		Promise.all(
 			items.map(
-				async ({ id: itemId }): Promise<PointItems> => {
+				async ({ id: itemId }): Promise<PointItemsModel> => {
 					const pointItemCreate = await PrismaHelper.createPointItems({
 						point: {
 							connect: {
@@ -55,5 +56,26 @@ export class PointPrismaRepository implements PointRepository {
 		}
 
 		return pointCreate
+	}
+
+	async get(id: string): Promise<PointModel> {
+		const findPoint = await PrismaHelper.findOnePoint({
+			where: {
+				id
+			}
+		})
+
+		if (!findPoint) {
+			throw notFoundError(new Error(`Could not find point with id '${id}'`))
+		}
+
+		const { PointItems, ...point } = findPoint
+
+		const serializePoint = {
+			...point,
+			items: PointItems.map(({ items }) => items)
+		}
+
+		return serializePoint
 	}
 }
