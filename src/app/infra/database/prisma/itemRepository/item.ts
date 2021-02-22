@@ -4,7 +4,11 @@ import { PrismaHelper } from '../helpers/prismaHelper'
 
 export class ItemPrismaRepository implements GetItemRepository {
 	async get(id: string): Promise<ItemModel> {
-		const result = await PrismaHelper.findOneItem({ id })
+		const result = await PrismaHelper.findOneItem({
+			where: {
+				id
+			}
+		})
 
 		return result
 	}
