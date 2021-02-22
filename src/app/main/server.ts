@@ -11,8 +11,10 @@ async function main() {
 		server.installSubscriptionHandlers(httpServer)
 
 		httpServer.listen(PORT, () => {
-			console.log(`http://localhost:${PORT}${GRAPHQL_PATH}`)
-			console.log(`ws://localhost:${PORT}${GRAPHQL_PATH}`)
+			console.log(`Http Server runing at: http://localhost:${PORT}}`)
+			console.log(`Static files been served at: http://localhost:${PORT}/static`)
+			console.log(`GraphQL Server runing at: http://localhost:${PORT}${GRAPHQL_PATH}`)
+			console.log(`GraphQL Subscription Server runing at: ws://localhost:${PORT}${GRAPHQL_PATH}`)
 		})
 	} catch (error) {
 		console.error(error)
