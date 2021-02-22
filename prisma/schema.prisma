@@ -13,8 +13,8 @@ model Points {
   name       String
   email      String
   whatsapp   String
-  latitude   Decimal
-  longitude  Decimal
+  latitude   Int
+  longitude  Int
   city       String
   uf         String       @db.VarChar(2)
   PointItems PointItems[]
