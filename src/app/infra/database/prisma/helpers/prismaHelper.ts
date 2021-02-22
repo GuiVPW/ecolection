@@ -23,6 +23,29 @@ export const PrismaHelper = {
 		return search
 	},
 
+	async findOnePoint(
+		params?: Prisma.PointsFindFirstArgs
+	): Promise<
+		Points & {
+			PointItems: (PointItems & {
+				items: Items
+			})[]
+		}
+	> {
+		const search = await prisma.points.findFirst({
+			...params,
+			include: {
+				PointItems: {
+					include: {
+						items: true
+					}
+				}
+			}
+		})
+
+		return search
+	},
+
 	async createPoint(data: Prisma.PointsCreateInput): Promise<Points> {
 		const create = await prisma.points.create({ data })
 
