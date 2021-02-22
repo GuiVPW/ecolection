@@ -22,7 +22,7 @@ export class GetItemController implements Controller {
 			return ok({ data: item })
 		} catch (error) {
 			console.log(error)
-			return serverError()
+			return error
 		}
 	}
 }

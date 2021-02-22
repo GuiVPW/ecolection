@@ -11,7 +11,7 @@ export class GetItemsController implements Controller {
 			return ok({ data: items })
 		} catch (error) {
 			console.log(error)
-			return serverError()
+			return error
 		}
 	}
 }
