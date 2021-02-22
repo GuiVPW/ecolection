@@ -6,8 +6,8 @@ export interface PointModel {
 	name: string
 	email: string
 	whatsapp: string
-	latitude: number
-	longitude: number
+	latitude: string
+	longitude: string
 	city: string
 	uf: string
 	items: ItemModel[]

@@ -15,19 +15,7 @@ export class CreatePointController implements Controller {
 				}
 			}
 
-			const { name, email, whatsapp, latitude, longitude, city, uf, items, image } = httpRequest.args.data
-
-			const point = await this.createPoint.create({
-				name,
-				email,
-				image,
-				whatsapp,
-				latitude,
-				longitude,
-				city,
-				uf,
-				items
-			})
+			const point = await this.createPoint.create(httpRequest.args.data)
 
 			return ok({ data: point })
 		} catch (error) {

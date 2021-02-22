@@ -7,16 +7,21 @@ import { badRequest, notFoundError } from '@presentations/helpers/http-helper'
 import { PrismaHelper } from '../helpers/prismaHelper'
 
 export class PointPrismaRepository implements PointRepository {
-	async create(data: Omit<PointModel, 'id'>): Promise<Omit<PointModel, 'items'>> {
+	async create(
+		data: Omit<PointModel, 'id' | 'items'> & { items: string[] }
+	): Promise<Omit<PointModel, 'items'>> {
 		const { items, ...pointData } = data
 
 		const pointCreate = await PrismaHelper.createPoint({ ...pointData })
 
 		await Promise.all(
-			items.map(async ({ id: itemId }) => {
+			items.map(async itemId => {
 				const findItem = await PrismaHelper.findOneItem({
 					where: {
 						id: itemId
+					},
+					include: {
+						PointItems: true
 					}
 				})
 
@@ -26,18 +31,20 @@ export class PointPrismaRepository implements PointRepository {
 			})
 		)
 
-		Promise.all(
+		const pointItems = await Promise.all(
 			items.map(
-				async ({ id: itemId }): Promise<PointItemsModel> => {
+				async (itemId): Promise<ItemModel> => {
 					const pointItemCreate = await PrismaHelper.createPointItems({
-						point: {
-							connect: {
-								id: pointCreate.id
-							}
-						},
-						items: {
-							connect: {
-								id: itemId
+						data: {
+							point: {
+								connect: {
+									id: pointCreate.id
+								}
+							},
+							items: {
+								connect: {
+									id: itemId
+								}
 							}
 						}
 					})
@@ -46,7 +53,7 @@ export class PointPrismaRepository implements PointRepository {
 						throw badRequest(new Error(`Could not find item with id '${itemId}'`))
 					}
 
-					return pointItemCreate
+					return pointItemCreate.items
 				}
 			)
 		)
@@ -55,7 +62,12 @@ export class PointPrismaRepository implements PointRepository {
 			throw badRequest(new UnableError('Point'))
 		}
 
-		return pointCreate
+		const serializePoint = {
+			...pointCreate,
+			items: pointItems.map(item => item)
+		}
+
+		return serializePoint
 	}
 
 	async get(id: string): Promise<PointModel> {

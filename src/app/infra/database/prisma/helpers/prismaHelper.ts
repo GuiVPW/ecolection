@@ -52,9 +52,18 @@ export const PrismaHelper = {
 		return create
 	},
 
-	async createPointItems(data: Prisma.PointItemsCreateInput): Promise<PointItems> {
+	async createPointItems(
+		params: Prisma.PointItemsCreateArgs
+	): Promise<
+		PointItems & {
+			items: Items
+		}
+	> {
 		const create = await prisma.pointItems.create({
-			data
+			...params,
+			include: {
+				items: true
+			}
 		})
 
 		return create
