@@ -1,6 +1,10 @@
 import { gql } from 'apollo-server-express'
 
 export default gql`
+	extend type Query {
+		getPoint(id: String!): Point!
+	}
+
 	extend type Mutation {
 		createPoint(data: CreatePointInput!): Point!
 	}
