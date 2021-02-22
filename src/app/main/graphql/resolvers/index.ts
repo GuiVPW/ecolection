@@ -1,3 +1,4 @@
 import items from './items'
+import point from './point'
 
-export default [items]
+export default [items, point]
