@@ -1,4 +1,4 @@
-import { Items, Prisma, PrismaClient } from '@prisma/client'
+import { Items, PointItems, Points, Prisma, PrismaClient } from '@prisma/client'
 
 export const prisma = new PrismaClient()
 
@@ -11,23 +11,28 @@ export const PrismaHelper = {
 		await prisma.$disconnect()
 	},
 
-	async findOneItem(where?: Prisma.ItemsWhereInput): Promise<Items> {
-		const search = await prisma.items.findFirst({ where })
+	async findOneItem(params?: Prisma.ItemsFindUniqueArgs): Promise<Items> {
+		const search = await prisma.items.findFirst(params)
 
 		return search
 	},
 
-	async findManyItems(
-		where?: Prisma.ItemsWhereInput,
-		orderBy?: Prisma.Enumerable<Prisma.ItemsOrderByInput>
-	): Promise<Items[]> {
-		const search = await prisma.items.findMany({ where, orderBy })
+	async findManyItems(params?: Prisma.ItemsFindManyArgs): Promise<Items[]> {
+		const search = await prisma.items.findMany(params)
 
 		return search
 	},
 
-	async createItem(data: Prisma.ItemsCreateInput): Promise<Items> {
-		const create = await prisma.items.create({ data })
+	async createPoint(data: Prisma.PointsCreateInput): Promise<Points> {
+		const create = await prisma.points.create({ data })
+
+		return create
+	},
+
+	async createPointItems(data: Prisma.PointItemsCreateInput): Promise<PointItems> {
+		const create = await prisma.pointItems.create({
+			data
+		})
 
 		return create
 	}
