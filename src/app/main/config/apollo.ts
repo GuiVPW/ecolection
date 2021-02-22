@@ -20,7 +20,7 @@ const checkError = (error: GraphQLError, errorName: string): boolean => {
 	return [error.name, error.originalError?.name].some(name => name === errorName)
 }
 
-export const setupApollo = async (app: Express) => {
+const setupApollo = async (app: Express) => {
 	const server = new ApolloServer({
 		typeDefs,
 		resolvers,
@@ -38,3 +38,5 @@ export const setupApollo = async (app: Express) => {
 
 	return { server }
 }
+
+export default setupApollo
