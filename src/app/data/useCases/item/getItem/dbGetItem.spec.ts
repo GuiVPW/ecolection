@@ -33,6 +33,16 @@ const makeSut = (): SutTypes => {
 }
 
 describe('DbGetItem Usecase', () => {
+	test('Should call ItemRepository get method with correct values', async () => {
+		const { sut, itemRepositoryStub } = makeSut()
+
+		const getSpy = jest.spyOn(itemRepositoryStub, 'get')
+
+		await sut.get()
+
+		expect(getSpy).toHaveBeenCalledWith(undefined)
+	})
+
 	test('Should return an item on success', async () => {
 		const { sut } = makeSut()
 
