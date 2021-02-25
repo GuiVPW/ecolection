@@ -1,5 +1,5 @@
 import { ItemModel } from '@domain/models/item'
 
 export interface GetItems {
-	get(): Promise<ItemModel[]>
+	get(data?: Partial<ItemModel>): Promise<ItemModel[]>
 }
