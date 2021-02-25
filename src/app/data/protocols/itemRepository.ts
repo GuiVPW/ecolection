@@ -1,6 +1,7 @@
 import { ItemModel } from '@domain/models/item'
 
-export interface GetItemRepository {
-	get(id: string): Promise<ItemModel>
+export interface ItemRepository {
+	add(data: Omit<ItemModel, 'id'>): Promise<ItemModel>
+	get(data: Partial<ItemModel>): Promise<ItemModel>
 	getMany(): Promise<ItemModel[]>
 }
