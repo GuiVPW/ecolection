@@ -29,6 +29,16 @@ export const PrismaHelper = {
 		return searchItems
 	},
 
+	async deleteItem(params: Prisma.ItemsDeleteArgs): Promise<boolean> {
+		const deleteItem = await prisma.items.delete(params)
+
+		if (!deleteItem) {
+			return false
+		}
+
+		return true
+	},
+
 	async findOnePoint(
 		params?: Prisma.PointsFindFirstArgs
 	): Promise<
