@@ -21,7 +21,7 @@
       "@presentations/*": ["presentations/*"],
       "@domain/*": ["domain/*"],
       "@infra/*": ["infra/*"],
-      "@data/*": ["data/*"],
+      "@data/*": ["data/*"]
     },
 		"declaration": true
 	},
