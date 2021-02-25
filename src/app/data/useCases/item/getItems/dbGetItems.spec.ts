@@ -51,4 +51,14 @@ describe('DbGetItems Usecase', () => {
 
 		expect(promise).rejects.toThrowError('Could not find items with given parameters.')
 	})
+
+	test('Should call ItemRepository getMany method with correct values', async () => {
+		const { sut, itemRepositoryStub } = makeSut()
+
+		const getSpy = jest.spyOn(itemRepositoryStub, 'getMany')
+
+		await sut.get()
+
+		expect(getSpy).toHaveBeenCalledWith(undefined)
+	})
 })
