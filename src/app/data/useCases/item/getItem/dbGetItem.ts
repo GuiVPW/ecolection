@@ -8,7 +8,7 @@ export class DbGetItem implements GetItem {
 		const item = await this.getItemRepository.get(data)
 
 		if (!item) {
-			throw notFoundError(new Error(`Could not find item with id '${data.id}'`))
+			throw notFoundError(new Error('Could not find item with given parameters.'))
 		}
 
 		return item
