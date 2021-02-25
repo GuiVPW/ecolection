@@ -58,9 +58,9 @@ describe('DbGetItem Usecase', () => {
 	test('Should return an item on success', async () => {
 		const { sut } = makeSut()
 
-		const account = await sut.get()
+		const item = await sut.get()
 
-		expect(account).toEqual({
+		expect(item).toEqual({
 			id: 'valid_id',
 			title: 'valid_title',
 			image: 'valid_image'
