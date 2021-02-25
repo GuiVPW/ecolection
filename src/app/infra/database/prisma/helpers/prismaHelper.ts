@@ -11,16 +11,22 @@ export const PrismaHelper = {
 		await prisma.$disconnect()
 	},
 
-	async findOneItem(params?: Prisma.ItemsFindUniqueArgs): Promise<Items> {
-		const search = await prisma.items.findFirst(params)
+	async createItem(data: Prisma.ItemsCreateInput): Promise<Items> {
+		const createItem = await prisma.items.create({ data })
 
-		return search
+		return createItem
+	},
+
+	async findOneItem(params?: Prisma.ItemsFindUniqueArgs): Promise<Items> {
+		const searchItem = await prisma.items.findFirst(params)
+
+		return searchItem
 	},
 
 	async findManyItems(params?: Prisma.ItemsFindManyArgs): Promise<Items[]> {
-		const search = await prisma.items.findMany(params)
+		const searchItems = await prisma.items.findMany(params)
 
-		return search
+		return searchItems
 	},
 
 	async findOnePoint(
@@ -32,7 +38,7 @@ export const PrismaHelper = {
 			})[]
 		}
 	> {
-		const search = await prisma.points.findFirst({
+		const searchPoint = await prisma.points.findFirst({
 			...params,
 			include: {
 				PointItems: {
@@ -43,7 +49,7 @@ export const PrismaHelper = {
 			}
 		})
 
-		return search
+		return searchPoint
 	},
 
 	async createPoint(data: Prisma.PointsCreateInput): Promise<Points> {
@@ -59,13 +65,13 @@ export const PrismaHelper = {
 			items: Items
 		}
 	> {
-		const create = await prisma.pointItems.create({
+		const createPoint = await prisma.pointItems.create({
 			...params,
 			include: {
 				items: true
 			}
 		})
 
-		return create
+		return createPoint
 	}
 }
