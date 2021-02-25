@@ -61,4 +61,22 @@ describe('DbGetItems Usecase', () => {
 
 		expect(getSpy).toHaveBeenCalledWith(undefined)
 	})
+
+	test('Should return an item on success', async () => {
+		const { sut } = makeSut()
+
+		const items = await sut.get()
+
+		expect(items).toBeInstanceOf(Array)
+		expect(items[0]).toEqual({
+			id: 'valid_id',
+			title: 'valid_title',
+			image: 'valid_image'
+		})
+		expect(items[1]).toEqual({
+			id: 'valid_id_clone',
+			title: 'valid_title_clone',
+			image: 'valid_image_clone'
+		})
+	})
 })
