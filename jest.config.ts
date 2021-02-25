@@ -1,10 +1,14 @@
 import { compilerOptions } from './tsconfig.json'
 import { pathsToModuleNameMapper } from 'ts-jest/utils'
 
-module.exports = {
+export default {
+	preset: 'ts-jest',
 	roots: ['<rootDir>/src'],
-	coveragePathIgnorePatterns: ['node_modules'],
-	collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+	collectCoverageFrom: [
+		'<rootDir>/src/**/*.ts',
+		'!<RootDir>/src/main/**',
+		'!<RootDir>/src/presentations/protocols/**'
+	],
 	coverageDirectory: 'coverage',
 	coverageProvider: 'v8',
 	testEnvironment: 'node',
@@ -12,6 +16,7 @@ module.exports = {
 		'.+\\.ts$': 'ts-jest'
 	},
 	watchPathIgnorePatterns: ['globalConfig'],
+	coveragePathIgnorePatterns: ['node_modules'],
 	moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
 		prefix: '<rootDir>/src/app'
 	})
