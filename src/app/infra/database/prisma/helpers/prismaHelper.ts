@@ -17,7 +17,7 @@ export const PrismaHelper = {
 		return createItem
 	},
 
-	async findOneItem(params?: Prisma.ItemsFindUniqueArgs): Promise<Items> {
+	async findOneItem(params?: Prisma.ItemsFindFirstArgs): Promise<Items> {
 		const searchItem = await prisma.items.findFirst(params)
 
 		return searchItem
@@ -40,6 +40,7 @@ export const PrismaHelper = {
 	},
 
 	async deleteManyItems(params: Prisma.ItemsDeleteManyArgs): Promise<boolean> {
+		await prisma.pointItems.deleteMany({ where: { items: params.where } })
 		const deleteItems = await prisma.items.deleteMany(params)
 
 		if (!deleteItems) {
