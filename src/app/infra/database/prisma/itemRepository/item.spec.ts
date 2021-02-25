@@ -24,4 +24,20 @@ describe('Item Prisma Repository', () => {
 		expect(item.title).toBe('any_title')
 		expect(item.image).toBe('any_image')
 	})
+
+	test('Should return an item on success', async () => {
+		const sut = makeSut()
+
+		await sut.add({
+			title: 'any_title',
+			image: 'any_image'
+		})
+
+		const item = await sut.get()
+
+		expect(item).toBeTruthy()
+		expect(item.id).toBeTruthy()
+		expect(item.title).toBe('any_title')
+		expect(item.image).toBe('any_image')
+	})
 })
