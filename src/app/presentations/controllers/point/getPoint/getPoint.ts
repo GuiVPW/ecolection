@@ -1,6 +1,6 @@
 import { HttpRequest, HttpResponse, Controller, GetPoint } from './getPointProtocols'
-import { MissingParamError, InvalidParamError } from '../../errors'
-import { badRequest, ok } from '../../helpers/http-helper'
+import { MissingParamError, InvalidParamError } from '@presentations/errors'
+import { badRequest, ok } from '@presentations/helpers/http-helper'
 
 export class GetPointController implements Controller {
 	constructor(private getPoint: GetPoint) {}

@@ -1,6 +1,6 @@
 import { HttpRequest, HttpResponse, Controller, GetItem } from './getItemProtocols'
-import { MissingParamError, InvalidParamError } from '../../errors'
-import { badRequest, ok, serverError } from '../../helpers/http-helper'
+import { MissingParamError, InvalidParamError } from '@presentations/errors'
+import { badRequest, ok } from '@presentations/helpers/http-helper'
 
 export class GetItemController implements Controller {
 	constructor(private getItem: GetItem) {}
