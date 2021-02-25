@@ -1,6 +1,6 @@
 import { HttpRequest, HttpResponse, Controller, CreatePoint } from './createPointProtocols'
 import { MissingParamError } from '@presentations/errors'
-import { badRequest, ok } from '../../helpers/http-helper'
+import { badRequest, ok } from '@presentations/helpers/http-helper'
 
 export class CreatePointController implements Controller {
 	constructor(private createPoint: CreatePoint) {}

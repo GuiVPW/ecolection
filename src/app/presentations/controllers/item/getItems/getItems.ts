@@ -1,5 +1,5 @@
 import { HttpRequest, HttpResponse, Controller, GetItems } from './getItemsProtocols'
-import { ok, serverError } from '../../helpers/http-helper'
+import { ok, serverError } from '@presentations/helpers/http-helper'
 
 export class GetItemsController implements Controller {
 	constructor(private getItems: GetItems) {}
