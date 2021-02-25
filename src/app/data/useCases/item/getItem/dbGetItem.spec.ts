@@ -33,6 +33,18 @@ const makeSut = (): SutTypes => {
 }
 
 describe('DbGetItem Usecase', () => {
+	test('Should throw if ItemRepository get method throws', async () => {
+		const { sut, itemRepositoryStub } = makeSut()
+
+		jest
+			.spyOn(itemRepositoryStub, 'get')
+			.mockReturnValueOnce(Promise.reject(new Error('Could not find item with given parameters.')))
+
+		const promise = sut.get()
+
+		expect(promise).rejects.toThrowError('Could not find item with given parameters.')
+	})
+
 	test('Should call ItemRepository get method with correct values', async () => {
 		const { sut, itemRepositoryStub } = makeSut()
 
