@@ -13,7 +13,7 @@ export class GetPointController implements Controller {
 
 			const { id } = httpRequest.args
 
-			const point = await this.getPoint.get(id)
+			const point = await this.getPoint.get({ id })
 
 			if (!point) {
 				return badRequest(new InvalidParamError('id'))
