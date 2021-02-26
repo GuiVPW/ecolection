@@ -3,6 +3,10 @@ import { Helper } from './prismaHelperProtocols'
 
 export const prisma = new PrismaClient()
 
+function lowerCaseCapital(string: string) {
+	return string.charAt(0).toLowerCase() + string.slice(1)
+}
+
 export const PrismaHelper: Helper = {
 	async connect(): Promise<void> {
 		await prisma.$connect()
@@ -13,25 +17,25 @@ export const PrismaHelper: Helper = {
 	},
 
 	async create(data, model) {
-		const create = prisma[model.toLowerCase()].create({ data })
+		const create = prisma[lowerCaseCapital(model)].create(data)
 
 		return create
 	},
 
 	async findOne(model, params) {
-		const search = await prisma[model.toLowerCase()].findFirst(params)
+		const search = await prisma[lowerCaseCapital(model)].findFirst(params)
 
 		return search
 	},
 
 	async findMany(model, params) {
-		const search = await prisma[model.toLowerCase()].findMany(params)
+		const search = await prisma[lowerCaseCapital(model)].findMany(params)
 
 		return search
 	},
 
 	async delete(model, params) {
-		const deleteOne = await prisma[model.toLowerCase()].delete(params)
+		const deleteOne = await prisma[lowerCaseCapital(model)].delete(params)
 
 		if (!deleteOne) {
 			return false
@@ -41,7 +45,7 @@ export const PrismaHelper: Helper = {
 	},
 
 	async deleteMany(model, params) {
-		const deleteMany = await prisma[model.toLowerCase()].deleteMany(params)
+		const deleteMany = await prisma[lowerCaseCapital(model)].deleteMany(params)
 
 		if (!deleteMany) {
 			return false

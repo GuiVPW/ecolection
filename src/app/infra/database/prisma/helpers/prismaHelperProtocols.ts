@@ -2,11 +2,11 @@ import { Item, PointItems, Point, Prisma } from '@prisma/client'
 
 type PrismaModels = 'Item' | 'Point' | 'PointItems'
 
-type CreateInputs<Model extends PrismaModels> = Model extends 'Item'
-	? Prisma.ItemCreateInput
+type CreateArgs<Model extends PrismaModels> = Model extends 'Item'
+	? Prisma.ItemCreateArgs
 	: Model extends 'PointItems'
-	? Prisma.PointItemsCreateInput
-	: Prisma.PointCreateInput
+	? Prisma.PointItemsCreateArgs
+	: Prisma.PointCreateArgs
 
 type FindFirstArgs<Model extends PrismaModels> = Model extends 'Item'
 	? Prisma.ItemFindFirstArgs
@@ -35,7 +35,10 @@ type DeleteManyArgs<Model extends PrismaModels> = Model extends 'Item'
 type JoinedPayloads<Model extends PrismaModels> = Model extends 'Item'
 	? Item
 	: Model extends 'PointItems'
-	? PointItems
+	? PointItems & {
+			items: Item
+			points: Omit<Point, 'items'>
+	  }
 	: Point & {
 			PointItems: (PointItems & {
 				items: Item
@@ -47,10 +50,7 @@ export interface Helper {
 
 	disconnect(): Promise<void>
 
-	create<Model extends PrismaModels>(
-		data: CreateInputs<Model>,
-		model: Model
-	): Promise<JoinedPayloads<Model>>
+	create<Model extends PrismaModels>(data: CreateArgs<Model>, model: Model): Promise<JoinedPayloads<Model>>
 
 	findOne<Model extends PrismaModels>(
 		model: Model,
