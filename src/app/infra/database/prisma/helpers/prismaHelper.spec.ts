@@ -10,10 +10,10 @@ describe('Prisma Helper', () => {
 	})
 
 	test('Should reconnect if Prisma is down', async () => {
-		let items = await sut.findManyItems()
+		let items = await sut.findMany<'Item'>('Item')
 		expect(items).toBeTruthy()
 		await sut.disconnect()
-		items = await sut.findManyItems()
+		items = await sut.findMany<'Item'>('Item')
 		await sut.disconnect()
 	})
 })
