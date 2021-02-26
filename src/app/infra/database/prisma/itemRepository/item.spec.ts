@@ -6,7 +6,15 @@ describe('Item Prisma Repository', () => {
 
 	afterAll(PrismaHelper.disconnect)
 
-	beforeEach(async () => await PrismaHelper.deleteManyItems({}))
+	beforeEach(
+		async () =>
+			await PrismaHelper.deleteManyItems({
+				where: {
+					title: 'any_title',
+					image: 'any_image'
+				}
+			})
+	)
 
 	const makeSut = (): ItemPrismaRepository => {
 		return new ItemPrismaRepository()
