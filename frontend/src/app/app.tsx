@@ -1,12 +1,13 @@
 import { Route, Switch } from 'react-router-dom'
 
 import { HOME } from './constants/routes'
+import Home from './pages/Home'
 
 export const App = (): JSX.Element => {
 	return (
 		<>
 			<Switch>
-				<div></div>
+				<Route component={Home} exact path={HOME} />
 			</Switch>
 		</>
 	)
