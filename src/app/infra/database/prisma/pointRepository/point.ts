@@ -1,19 +1,16 @@
 import { PointRepository } from '@data/protocols/pointRepository'
-import { ItemModel } from '@domain/models/item'
 import { PointModel } from '@domain/models/point'
-import { PointItemsModel } from '@domain/models/pointItems'
 import { PrismaHelper } from '../helpers/prismaHelper'
 
-type CreatePoint = Omit<PointModel, 'items'>
 export class PointPrismaRepository implements PointRepository {
-	async create(data: Omit<PointModel, 'id' | 'items'>): Promise<CreatePoint> {
-		const result = await PrismaHelper.create('Point', data)
+	async create(data: Omit<PointModel, 'id' | 'items'>): Promise<Omit<PointModel, 'items'>> {
+		const result = await PrismaHelper.create<'Point'>(data, 'Point')
 
 		return result
 	}
 
 	async get(data?: Partial<PointModel>): Promise<PointModel> {
-		const getPoints = await PrismaHelper.findOne('Point', {
+		const getPoints = await PrismaHelper.findOne<'Point'>('Point', {
 			where: data,
 			include: {
 				PointItems: {
@@ -24,11 +21,7 @@ export class PointPrismaRepository implements PointRepository {
 			}
 		})
 
-		const { PointItems, ...pointWithoutItems } = getPoints as Omit<PointModel, 'items'> & {
-			PointItems: (PointItemsModel & {
-				items: ItemModel
-			})[]
-		}
+		const { PointItems, ...pointWithoutItems } = getPoints
 
 		const items = PointItems.map(({ items }) => items)
 
@@ -41,7 +34,7 @@ export class PointPrismaRepository implements PointRepository {
 	}
 
 	async deleteMany(): Promise<boolean> {
-		const deleteManyPoints = await PrismaHelper.deleteMany('Point')
+		const deleteManyPoints = await PrismaHelper.deleteMany<'Point'>('Point')
 
 		if (!deleteManyPoints) {
 			return false
