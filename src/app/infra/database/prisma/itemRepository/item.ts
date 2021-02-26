@@ -4,25 +4,32 @@ import { PrismaHelper } from '../helpers/prismaHelper'
 
 export class ItemPrismaRepository implements ItemRepository {
 	async add(data: Omit<ItemModel, 'id'>): Promise<ItemModel> {
-		const result = await PrismaHelper.createItem(data)
+		const result = await PrismaHelper.create<'Item'>(data, 'Item')
 
 		return result
 	}
 
 	async get(data?: Partial<ItemModel>): Promise<ItemModel> {
-		const result = await PrismaHelper.findOneItem({
-			where: data,
-			include: {
-				PointItems: true
-			}
+		const result = await PrismaHelper.findOne<'Item'>('Item', {
+			where: data
 		})
+
+		return <ItemModel>result
+	}
+
+	async getMany(): Promise<ItemModel[]> {
+		const result = await PrismaHelper.findMany<'Item'>('Item')
 
 		return result
 	}
 
-	async getMany(): Promise<ItemModel[]> {
-		const result = await PrismaHelper.findManyItems()
+	async deleteMany(): Promise<boolean> {
+		const result = await PrismaHelper.deleteMany<'Item'>('Item')
 
-		return result
+		if (!result) {
+			return false
+		}
+
+		return true
 	}
 }
