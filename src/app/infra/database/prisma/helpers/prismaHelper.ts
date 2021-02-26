@@ -1,8 +1,9 @@
-import { Items, PointItems, Points, Prisma, PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
+import { Helper } from './prismaHelperProtocols'
 
 export const prisma = new PrismaClient()
 
-export const PrismaHelper = {
+export const PrismaHelper: Helper = {
 	async connect(): Promise<void> {
 		await prisma.$connect()
 	},
@@ -11,95 +12,38 @@ export const PrismaHelper = {
 		await prisma.$disconnect()
 	},
 
-	async createItem(data: Prisma.ItemsCreateInput): Promise<Items> {
-		const createItem = await prisma.items.create({ data })
-
-		return createItem
-	},
-
-	async findOneItem(params?: Prisma.ItemsFindFirstArgs): Promise<Items> {
-		const searchItem = await prisma.items.findFirst(params)
-
-		return searchItem
-	},
-
-	async findManyItems(params?: Prisma.ItemsFindManyArgs): Promise<Items[]> {
-		const searchItems = await prisma.items.findMany(params)
-
-		return searchItems
-	},
-
-	async deleteItem(params: Prisma.ItemsDeleteArgs): Promise<boolean> {
-		const deleteItem = await prisma.items.delete(params)
-
-		if (!deleteItem) {
-			return false
-		}
-
-		return true
-	},
-
-	async deleteManyItems(params: Prisma.ItemsDeleteManyArgs): Promise<boolean> {
-		await prisma.pointItems.deleteMany({ where: { items: params.where } })
-		const deleteItems = await prisma.items.deleteMany(params)
-
-		if (!deleteItems) {
-			return false
-		}
-
-		return true
-	},
-
-	async findOnePoint(
-		params?: Prisma.PointsFindFirstArgs
-	): Promise<
-		Points & {
-			PointItems: (PointItems & {
-				items: Items
-			})[]
-		}
-	> {
-		const searchPoint = await prisma.points.findFirst({
-			...params,
-			include: {
-				PointItems: {
-					include: {
-						items: true
-					}
-				}
-			}
-		})
-
-		return searchPoint
-	},
-
-	async createPoint(data: Prisma.PointsCreateInput): Promise<Points> {
-		const create = await prisma.points.create({ data })
+	async create(model, data) {
+		const create = prisma[model.toLowerCase()].create({ data })
 
 		return create
 	},
 
-	async createPointItems(
-		params: Prisma.PointItemsCreateArgs
-	): Promise<
-		PointItems & {
-			items: Items
-		}
-	> {
-		const createPoint = await prisma.pointItems.create({
-			...params,
-			include: {
-				items: true
-			}
-		})
+	async findOne(model, params) {
+		const search = await prisma[model.toLowerCase()].findFirst(params)
 
-		return createPoint
+		return search
 	},
 
-	async deletePoint(params: Prisma.PointsDeleteArgs): Promise<boolean> {
-		const deletePoint = await prisma.points.delete(params)
+	async findMany(model, params) {
+		const search = await prisma[model.toLowerCase()].findMany(params)
 
-		if (!deletePoint) {
+		return search
+	},
+
+	async delete(model, params) {
+		const deleteOne = await prisma[model.toLowerCase()].delete(params)
+
+		if (!deleteOne) {
+			return false
+		}
+
+		return true
+	},
+
+	async deleteMany(model, params) {
+		const deleteMany = await prisma[model.toLowerCase()].deleteMany(params)
+
+		if (!deleteMany) {
 			return false
 		}
 
