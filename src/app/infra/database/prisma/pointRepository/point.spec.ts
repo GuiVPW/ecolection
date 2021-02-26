@@ -34,6 +34,25 @@ describe('Point Prisma Repository', () => {
 		})
 
 		expect(point).toBeTruthy()
-		expect.objectContaining(point)
+		expect(point).toEqual(expect.objectContaining(point))
+	})
+
+	test('Should get a point on success', async () => {
+		const sut = makeSut()
+		const createPoint = await sut.create({
+			name: 'any_name',
+			image: 'any_image',
+			city: 'any_city',
+			email: 'any_email',
+			latitude: '0',
+			longitude: '0',
+			uf: 'NA',
+			whatsapp: 'any_whatsapp'
+		})
+
+		const getPoint = await sut.get(createPoint)
+
+		expect(getPoint).toBeTruthy()
+		expect(getPoint).toEqual(expect.objectContaining(getPoint))
 	})
 })
