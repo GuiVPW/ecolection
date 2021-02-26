@@ -1,4 +1,4 @@
-import { DbGetPoint } from '@data/useCases/getPoint/dbGetPoint'
+import { DbGetPoint } from '@data/useCases/point/getPoint/dbGetPoint'
 import { PointPrismaRepository } from '@infra/database/prisma/pointRepository/point'
 import { GetPointController } from '@presentations/controllers/point/getPoint/getPoint'
 
