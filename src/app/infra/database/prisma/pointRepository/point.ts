@@ -39,4 +39,14 @@ export class PointPrismaRepository implements PointRepository {
 
 		return result
 	}
+
+	async deleteMany(): Promise<boolean> {
+		const deleteManyPoints = await PrismaHelper.deleteMany('Point')
+
+		if (!deleteManyPoints) {
+			return false
+		}
+
+		return true
+	}
 }
