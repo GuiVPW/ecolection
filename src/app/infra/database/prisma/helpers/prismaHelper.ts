@@ -94,5 +94,15 @@ export const PrismaHelper = {
 		})
 
 		return createPoint
+	},
+
+	async deletePoint(params: Prisma.PointsDeleteArgs): Promise<boolean> {
+		const deletePoint = await prisma.points.delete(params)
+
+		if (!deletePoint) {
+			return false
+		}
+
+		return true
 	}
 }
