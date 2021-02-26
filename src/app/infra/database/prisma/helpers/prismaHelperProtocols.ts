@@ -2,15 +2,39 @@ import { Item, PointItems, Point, Prisma } from '@prisma/client'
 
 type PrismaModels = 'Item' | 'Point' | 'PointItems'
 
-type CreateInputs = Prisma.ItemCreateInput | Prisma.PointItemsCreateInput | Prisma.PointCreateInput
-type FindFirstArgs = Prisma.ItemFindFirstArgs | Prisma.PointItemsFindFirstArgs | Prisma.PointFindFirstArgs
-type FindManyArgs = Prisma.ItemFindManyArgs | Prisma.PointItemsFindManyArgs | Prisma.PointFindManyArgs
-type DeleteArgs = Prisma.ItemDeleteArgs | Prisma.PointItemsDeleteArgs | Prisma.PointDeleteArgs
-type DeleteManyArgs = Prisma.ItemDeleteManyArgs | Prisma.PointItemsDeleteArgs | Prisma.PointDeleteArgs
+type CreateInputs<Model extends PrismaModels> = Model extends 'Item'
+	? Prisma.ItemCreateInput
+	: Model extends 'PointItems'
+	? Prisma.PointItemsCreateInput
+	: Prisma.PointCreateInput
 
-type JoinedPayloads = PrismaModels extends 'Item'
+type FindFirstArgs<Model extends PrismaModels> = Model extends 'Item'
+	? Prisma.ItemFindFirstArgs
+	: Model extends 'PointItems'
+	? Prisma.PointItemsFindFirstArgs
+	: Prisma.PointFindFirstArgs
+
+type FindManyArgs<Model extends PrismaModels> = Model extends 'Item'
+	? Prisma.ItemFindManyArgs
+	: Model extends 'PointItems'
+	? Prisma.PointItemsFindManyArgs
+	: Prisma.PointFindManyArgs
+
+type DeleteArgs<Model extends PrismaModels> = Model extends 'Item'
+	? Prisma.ItemDeleteArgs
+	: Model extends 'PointItems'
+	? Prisma.PointItemsDeleteArgs
+	: Prisma.PointDeleteArgs
+
+type DeleteManyArgs<Model extends PrismaModels> = Model extends 'Item'
+	? Prisma.ItemDeleteManyArgs
+	: Model extends 'PointItems'
+	? Prisma.PointItemsDeleteManyArgs
+	: Prisma.PointDeleteManyArgs
+
+type JoinedPayloads<Model extends PrismaModels> = Model extends 'Item'
 	? Item
-	: PrismaModels extends 'PointItems'
+	: Model extends 'PointItems'
 	? PointItems
 	: Point & {
 			PointItems: (PointItems & {
@@ -23,13 +47,22 @@ export interface Helper {
 
 	disconnect(): Promise<void>
 
-	create(model: PrismaModels, data: CreateInputs): Promise<JoinedPayloads>
+	create<Model extends PrismaModels>(
+		data: CreateInputs<Model>,
+		model: Model
+	): Promise<JoinedPayloads<Model>>
 
-	findOne(model: PrismaModels, params?: FindFirstArgs): Promise<JoinedPayloads>
+	findOne<Model extends PrismaModels>(
+		model: Model,
+		params?: FindFirstArgs<Model>
+	): Promise<JoinedPayloads<Model>>
 
-	findMany(model: PrismaModels, params?: FindManyArgs): Promise<JoinedPayloads>
+	findMany<Model extends PrismaModels>(
+		model: Model,
+		params?: FindManyArgs<Model>
+	): Promise<JoinedPayloads<Model>[]>
 
-	delete(model: PrismaModels, params?: DeleteArgs): Promise<boolean>
+	delete<Model extends PrismaModels>(model: Model, params?: DeleteArgs<Model>): Promise<boolean>
 
-	deleteMany(model: PrismaModels, params?: DeleteManyArgs): Promise<boolean>
+	deleteMany<Model extends PrismaModels>(model: Model, params?: DeleteManyArgs<Model>): Promise<boolean>
 }
