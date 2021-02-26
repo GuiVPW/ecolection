@@ -22,7 +22,7 @@ describe('Item Prisma Repository', () => {
 
 	test('Should create an item on success', async () => {
 		const sut = makeSut()
-		const item = await sut.add({
+		const item = await sut.create({
 			title: 'any_title',
 			image: 'any_image'
 		})
@@ -36,7 +36,7 @@ describe('Item Prisma Repository', () => {
 	test('Should return an item on success', async () => {
 		const sut = makeSut()
 
-		await sut.add({
+		await sut.create({
 			title: 'any_title',
 			image: 'any_image'
 		})
@@ -53,7 +53,7 @@ describe('Item Prisma Repository', () => {
 		const sut = makeSut()
 
 		for (let count = 0; count <= 3; count++) {
-			await sut.add({
+			await sut.create({
 				title: 'any_title',
 				image: 'any_image'
 			})
