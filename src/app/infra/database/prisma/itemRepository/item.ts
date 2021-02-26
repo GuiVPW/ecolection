@@ -3,8 +3,8 @@ import { ItemModel } from '@domain/models/item'
 import { PrismaHelper } from '../helpers/prismaHelper'
 
 export class ItemPrismaRepository implements ItemRepository {
-	async add(data: Omit<ItemModel, 'id'>): Promise<ItemModel> {
-		const result = await PrismaHelper.create<'Item'>(data, 'Item')
+	async create(data: Omit<ItemModel, 'id'>): Promise<ItemModel> {
+		const result = await PrismaHelper.create<'Item'>({ data }, 'Item')
 
 		return result
 	}
