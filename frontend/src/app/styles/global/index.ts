@@ -1,6 +1,12 @@
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
+  :root {
+    --primary-color: #34cb79;
+    --title-color: #7a33cc;
+    --text-color: #f8f8f2;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -17,27 +23,34 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-   -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
     ::-webkit-scrollbar {
-    background-color: #fff;
-    width: 16px;
-  }
-  ::-webkit-scrollbar-track {
-    background-color: #fff;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: #babac0;
-    border-radius: 16px;
-    border: 4px solid #fff;
-  }
-  ::-webkit-scrollbar-button {
-    display: none;
+      background: #282a36;
+      -webkit-font-smoothing: antialiased;
+      color: var(--text-color);
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: #fff;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #babac0;
+      border-radius: 16px;
+      border: 4px solid #fff;
+    }
+
+    ::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    background: #fafafa;
   }
 
-  }
-
-  body, input, button {
-    font: 16px '', sans-serif;
+  body,
+  input,
+  button {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
   }
 
   a {
@@ -57,6 +70,14 @@ const GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--title-color);
+  }
 `
 
 export { GlobalStyles }
