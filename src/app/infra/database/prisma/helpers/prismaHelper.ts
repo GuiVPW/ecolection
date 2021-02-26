@@ -12,7 +12,7 @@ export const PrismaHelper: Helper = {
 		await prisma.$disconnect()
 	},
 
-	async create(model, data) {
+	async create(data, model) {
 		const create = prisma[model.toLowerCase()].create({ data })
 
 		return create
