@@ -4,7 +4,7 @@ import { PrismaHelper } from '../helpers/prismaHelper'
 
 export class PointPrismaRepository implements PointRepository {
 	async create(data: Omit<PointModel, 'id' | 'items'>): Promise<Omit<PointModel, 'items'>> {
-		const result = await PrismaHelper.create<'Point'>(data, 'Point')
+		const result = await PrismaHelper.create<'Point'>({ data }, 'Point')
 
 		return result
 	}
