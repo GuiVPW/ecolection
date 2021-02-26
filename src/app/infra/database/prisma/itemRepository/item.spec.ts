@@ -8,7 +8,7 @@ describe('Item Prisma Repository', () => {
 
 	beforeEach(
 		async () =>
-			await PrismaHelper.deleteManyItems({
+			await PrismaHelper.deleteMany<'Item'>('Item', {
 				where: {
 					title: 'any_title',
 					image: 'any_image'
