@@ -6,8 +6,8 @@ import setupStaticFiles from './staticFiles'
 export const createExpressApp = async () => {
 	const app = express()
 
-	setupMiddlewares(app)
 	setupStaticFiles(app)
+	setupMiddlewares(app)
 
 	const { server } = await setupApollo(app)
 
