@@ -7,8 +7,6 @@
 This project was developed using the following techonolgies:
 - [Node.js](https://nodejs.org/en/)
 - [React](https://reactjs.org)
-- [React Native](https://facebook.github.io/react-native/)
-- [Expo](https://expo.io/)
 - [Typescript](https://www.typescriptlang.org/)
 - [GraphQL](https://graphql.org/)
 - [Prisma Io](https://www.prisma.io/)
@@ -32,6 +30,9 @@ The Ecollection is a marketplace that helps people to find wast collection point
 **Frontend:**
 - In the frontend directory, change the [constants variables if needed](frontend/src/constants)
 - Run the project with `yarn start` ✔️
+
+## 👀Mobile to come soon 
+
 ----
 
 Based on [Rocketseat](https://rocketseat.com.br/) project: **Ecoleta** ♻️
