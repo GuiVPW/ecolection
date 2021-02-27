@@ -1,3 +1,4 @@
+import { PORT } from '@main/config'
 import { notFoundError } from '@presentations/helpers/http-helper'
 import { GetItems, ItemModel, ItemRepository } from './dbGetItemsProtocols'
 
@@ -11,6 +12,11 @@ export class DbGetItems implements GetItems {
 			throw notFoundError(new Error('Could not find items with given parameters.'))
 		}
 
-		return items
+		const serializedItems = items.map(({ image, ...itemParams }) => ({
+			...itemParams,
+			image: `http://localhost:${PORT}/static/${image}`
+		}))
+
+		return serializedItems
 	}
 }
