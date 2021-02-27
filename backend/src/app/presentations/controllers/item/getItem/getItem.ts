@@ -13,7 +13,7 @@ export class GetItemController implements Controller {
 
 			const { id } = httpRequest.args
 
-			const item = await this.getItem.get(id)
+			const item = await this.getItem.get({ id })
 
 			if (!item) {
 				return badRequest(new InvalidParamError('id'))
