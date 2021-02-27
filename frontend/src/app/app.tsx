@@ -1,6 +1,7 @@
 import { Route, Switch } from 'react-router-dom'
 
-import { HOME } from './constants/routes'
+import { CREATE_POINT, HOME } from './constants/routes'
+import CreatePoint from './pages/CreatePoint'
 import Home from './pages/Home'
 
 export const App = (): JSX.Element => {
@@ -8,6 +9,7 @@ export const App = (): JSX.Element => {
 		<>
 			<Switch>
 				<Route component={Home} exact path={HOME} />
+				<Route component={CreatePoint} exact path={CREATE_POINT} />
 			</Switch>
 		</>
 	)
