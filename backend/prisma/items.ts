@@ -1,4 +1,6 @@
-export const items = [
+import { Item } from '@prisma/client'
+
+export const items: Omit<Item, 'id'>[] = [
 	{
 		title: 'lamps',
 		image: 'lampadas.svg'

@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 async function main() {
 	for (let item of items) {
-		await prisma.items.create({
+		await prisma.item.create({
 			data: item
 		})
 	}
