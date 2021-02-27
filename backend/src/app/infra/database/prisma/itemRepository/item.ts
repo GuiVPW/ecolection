@@ -14,7 +14,7 @@ export class ItemPrismaRepository implements ItemRepository {
 			where: data
 		})
 
-		return <ItemModel>result
+		return result
 	}
 
 	async getMany(): Promise<ItemModel[]> {
