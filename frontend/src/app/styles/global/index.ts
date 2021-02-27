@@ -3,8 +3,8 @@ import { createGlobalStyle } from 'styled-components'
 const GlobalStyles = createGlobalStyle`
   :root {
     --primary-color: #34cb79;
-    --title-color: #7a33cc;
-    --text-color: #f8f8f2;
+    --title-color: #322153;
+    --text-color: #6C6C80;
   }
 
   * {
@@ -44,7 +44,7 @@ const GlobalStyles = createGlobalStyle`
       display: none;
     }
 
-    background: #fafafa;
+    background: #f2f2f2;
   }
 
   body,
