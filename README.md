@@ -22,8 +22,11 @@ The Ecollection is a marketplace that helps people to find wast collection point
 
 **Backend**:
 - In the backend directory, run the *docker-compose* file
-- Run `yarn migrate:generate` to create the database and create migrations and seeds
+- Create a .env file inside prisma directory, add the key DATABASE_URL with the url of your database
+  - Ex: `DATABASE_URL="postgresql://postgres:postgres@localhost:5434/ecolection?schema=public"`
+- Run `yarn migrate:generate` to create the database andcreate migrations and seeds
   - Optional: Run `yarn studio` to open a *GUI* of the database you just created
+
 - Run `yarn dev` or `yarn start` to run the Express and GraphQL servers ✔️
 - Optional: Run `yarn test:unit` to run all the .spec tests
 
