@@ -33,8 +33,6 @@ The Ecollection is a marketplace that helps people to find wast collection point
 
 ## 👀Mobile to come soon 
 
-----
-
 Based on [Rocketseat](https://rocketseat.com.br/) project: **Ecoleta** ♻️
 
 Made by [Guilherme Vieira](https://github.com/GuiVPW) ❤️
