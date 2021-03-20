@@ -4,7 +4,7 @@
 
 ## 🚀 Technologies
 
-This project was developed using the following techonolgies:
+This project was developed using the following technologies:
 - [Node.js](https://nodejs.org/en/)
 - [React](https://reactjs.org)
 - [Typescript](https://www.typescriptlang.org/)
